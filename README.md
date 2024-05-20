@@ -1,0 +1,1 @@
+# obsidian-open-note-tracker
