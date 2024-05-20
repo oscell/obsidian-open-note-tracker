@@ -19,12 +19,15 @@ export default class MyPlugin extends Plugin {
 		await this.loadSettings();
 
         // Listen for changes in the active leaf
-        this.registerEvent(this.app.workspace.on('active-leaf-change', leaf => {
-            const markdownView = leaf.view as MarkdownView;
-            if (markdownView && markdownView.file) {
-                this.updateOpenedTime(markdownView.file);
-            }
-        }));
+		this.registerEvent(this.app.workspace.on('active-leaf-change', leaf => {
+			// Check if leaf is not null
+			if (leaf !== null) {
+				const markdownView = leaf.view as MarkdownView;
+				if (markdownView && markdownView.file) {
+					this.updateOpenedTime(markdownView.file);
+				}
+			}
+		}));
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
